@@ -1,0 +1,22 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "e2217709-5ecf-4c69-b786-98b02836aa6e",
+        "clusterUri": "",
+        "type": "Fabric",
+        "databaseItemId": "780086ae-2f83-b2c4-4afd-7adb93437880",
+        "databaseItemName": "eventhouse01"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "3f9dbe11-ee2a-40f0-8c14-c7d041ec00ad",
+        "content": "//***********************************************************************************************************\n// Here are two articles to help you get started with KQL:\n// KQL reference guide - https://aka.ms/KQLguide\n// SQL - KQL conversions - https://aka.ms/sqlcheatsheet\n//***********************************************************************************************************\n\n// Use \"take\" to view a sample number of records in the table and check the data.\nyellowtaxi\n| take 100\n\n",
+        "title": "Tab",
+        "dataSourceId": "e2217709-5ecf-4c69-b786-98b02836aa6e"
+      }
+    ]
+  }
+}

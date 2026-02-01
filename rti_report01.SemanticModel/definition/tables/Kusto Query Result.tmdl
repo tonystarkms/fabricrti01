@@ -1,0 +1,193 @@
+table 'Kusto Query Result'
+	lineageTag: 74dd1c98-498e-43c3-b4bc-722b0626236d
+
+	column VendorID
+		dataType: int64
+		formatString: 0
+		lineageTag: 7dea34a8-702f-4300-8060-9f0c8af6b7ea
+		summarizeBy: count
+		sourceColumn: VendorID
+
+		annotation SummarizationSetBy = Automatic
+
+	column tpep_pickup_datetime
+		dataType: string
+		lineageTag: 9ab4e9a8-5b58-49a0-8202-7b2fd653e3b0
+		summarizeBy: none
+		sourceColumn: tpep_pickup_datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column tpep_dropoff_datetime
+		dataType: string
+		lineageTag: 11e8dc3b-a97b-4415-912d-39558e26577c
+		summarizeBy: none
+		sourceColumn: tpep_dropoff_datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column passenger_count
+		dataType: double
+		lineageTag: 6a659d19-a764-4beb-a993-84b5b077796a
+		summarizeBy: sum
+		sourceColumn: passenger_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column trip_distance
+		dataType: double
+		lineageTag: 698fcce0-88f6-4af3-9c48-6a2e1ec18eec
+		summarizeBy: sum
+		sourceColumn: trip_distance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RatecodeID
+		dataType: double
+		lineageTag: 5d64276c-dad0-4228-b44d-0cca680ca1da
+		summarizeBy: count
+		sourceColumn: RatecodeID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column store_and_fwd_flag
+		dataType: string
+		lineageTag: e9d8acd8-8aeb-4208-8559-4ada47f0743f
+		summarizeBy: none
+		sourceColumn: store_and_fwd_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column PULocationID
+		dataType: int64
+		formatString: 0
+		lineageTag: d239b8bb-c80a-4054-bea2-268bc6169fe4
+		summarizeBy: count
+		sourceColumn: PULocationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOLocationID
+		dataType: int64
+		formatString: 0
+		lineageTag: 407ebd62-8f99-4149-921d-3342d2ba3ebb
+		summarizeBy: count
+		sourceColumn: DOLocationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_type
+		dataType: int64
+		formatString: 0
+		lineageTag: 77821afa-e018-4e29-a472-d6632ad1145b
+		summarizeBy: sum
+		sourceColumn: payment_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column fare_amount
+		dataType: double
+		lineageTag: b6709341-c21b-49ee-8940-12cf3cc96b9c
+		summarizeBy: sum
+		sourceColumn: fare_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column extra
+		dataType: double
+		lineageTag: f40369b5-1de3-4199-a1c1-3e0215f54011
+		summarizeBy: sum
+		sourceColumn: extra
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column mta_tax
+		dataType: double
+		lineageTag: 758c983a-d97c-4ba5-835d-5e1431900875
+		summarizeBy: sum
+		sourceColumn: mta_tax
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tip_amount
+		dataType: double
+		lineageTag: 49263677-2eb6-4904-827a-556394fe739e
+		summarizeBy: sum
+		sourceColumn: tip_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tolls_amount
+		dataType: double
+		lineageTag: b0548b35-a9e7-4dfd-85d9-1a293f7840a9
+		summarizeBy: sum
+		sourceColumn: tolls_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column improvement_surcharge
+		dataType: double
+		lineageTag: aaa3d5e5-b24a-4533-8bab-b1871f8a6412
+		summarizeBy: sum
+		sourceColumn: improvement_surcharge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_amount
+		dataType: double
+		lineageTag: 9e4c24ae-0115-432b-8cec-d5f15c567794
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column congestion_surcharge
+		dataType: double
+		lineageTag: 24187d2e-711a-4c8c-9314-79ea87f1c9c4
+		summarizeBy: sum
+		sourceColumn: congestion_surcharge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column airport_fee
+		dataType: double
+		lineageTag: 011fec69-99d9-4b29-b42c-01e8e6d1a9d4
+		summarizeBy: sum
+		sourceColumn: airport_fee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Kusto Query Result' = m
+		mode: directQuery
+		source =
+				let
+				Source = AzureDataExplorer.Contents("https://trd-qfh9vxjcg2pbm4j06z.z4.kusto.fabric.microsoft.com", "eventhouse01", "yellowtaxi", [])
+				in
+				Source
+
+	annotation PBI_ResultType = Table
+

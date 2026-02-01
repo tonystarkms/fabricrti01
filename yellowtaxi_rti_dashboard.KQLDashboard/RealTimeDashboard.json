@@ -1,0 +1,172 @@
+{
+  "schema_version": 67,
+  "tiles": [
+    {
+      "id": "612e68d0-94b7-4abd-a3f0-52863341cc62",
+      "queryRef": {
+        "kind": "query",
+        "queryId": "874dff8a-8814-48fc-844d-3dd41d5233a6"
+      },
+      "title": "yellowtaxi Table Preview",
+      "visualType": "table",
+      "pageId": "a839c1e3-89fb-45c5-a7d4-c4075a586c29",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 6,
+        "height": 6
+      },
+      "visualOptions": {}
+    },
+    {
+      "id": "4763d9e5-b333-4e61-a745-57272b907365",
+      "title": "trip count over time",
+      "visualType": "line",
+      "pageId": "a839c1e3-89fb-45c5-a7d4-c4075a586c29",
+      "layout": {
+        "x": 6,
+        "y": 0,
+        "width": 9,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "3f1a6ee8-47ad-4454-8833-070825b7f2e2"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": null,
+        "yColumns": null,
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "forceAxisTicks": false,
+        "drillthrough": []
+      }
+    },
+    {
+      "id": "54976c5a-9078-40b3-b770-1550219c9475",
+      "title": "New tile",
+      "visualType": "pie",
+      "pageId": "a839c1e3-89fb-45c5-a7d4-c4075a586c29",
+      "layout": {
+        "x": 15,
+        "y": 0,
+        "width": 9,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "c8f14554-d456-4bf7-8afd-602dc8fc89f6"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumn": null,
+        "yColumns": null,
+        "seriesColumns": null,
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "labelDisabled": false,
+        "pie__label": [
+          "name",
+          "percentage"
+        ],
+        "tooltipDisabled": false,
+        "pie__tooltip": [
+          "name",
+          "percentage",
+          "value"
+        ],
+        "pie__orderBy": "size",
+        "pie__kind": "donut",
+        "pie__topNSlices": null,
+        "drillthrough": []
+      }
+    }
+  ],
+  "baseQueries": [],
+  "parameters": [
+    {
+      "kind": "duration",
+      "id": "a23fc7ad-32c9-4ee8-8363-11a496dea3a1",
+      "displayName": "Time range",
+      "description": "",
+      "beginVariableName": "_startTime",
+      "endVariableName": "_endTime",
+      "defaultValue": {
+        "kind": "dynamic",
+        "count": 1,
+        "unit": "hours"
+      },
+      "showOnPages": {
+        "kind": "all"
+      }
+    }
+  ],
+  "dataSources": [
+    {
+      "id": "eff5ebc6-eb64-44bc-a96e-ed6a4615fe52",
+      "kind": "kusto-trident",
+      "clusterUri": "",
+      "database": "780086ae-2f83-b2c4-4afd-7adb93437880",
+      "name": "eventhouse01",
+      "scopeId": "kusto-trident",
+      "workspace": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Page 1",
+      "id": "a839c1e3-89fb-45c5-a7d4-c4075a586c29"
+    }
+  ],
+  "queries": [
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "eff5ebc6-eb64-44bc-a96e-ed6a4615fe52"
+      },
+      "text": "['yellowtaxi'] | take 10",
+      "id": "874dff8a-8814-48fc-844d-3dd41d5233a6",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "eff5ebc6-eb64-44bc-a96e-ed6a4615fe52"
+      },
+      "text": "yellowtaxi\n| extend pickup_time = todatetime(tpep_pickup_datetime)\n| summarize TripCount = count() by bin(pickup_time, 5m)\n| render timechart",
+      "id": "3f1a6ee8-47ad-4454-8833-070825b7f2e2",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "eff5ebc6-eb64-44bc-a96e-ed6a4615fe52"
+      },
+      "text": "yellowtaxi\n| extend PU = tostring(PULocationID)\n| summarize Count = count() by PU\n| top 10 by Count\n| render piechart\n",
+      "id": "c8f14554-d456-4bf7-8afd-602dc8fc89f6",
+      "usedVariables": []
+    }
+  ]
+}
